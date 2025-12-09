@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kindle PDF Generation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #status {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        progress {
+            width: 100%;
+            max-width: 400px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Generating File...</h1>
+    <div id="status">Converting images...</div>
+    <progress id="progressBar" value="0" max="100"></progress>
+    <div id="message" style="margin-top: 20px; color: #666;"></div>
+
+    <script src="lib/jspdf.umd.min.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="download.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Kindle to PDF",
+    "version": "1.0",
+    "description": "Capture Kindle Cloud Reader pages and convert to PDF",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "unlimitedStorage"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Kindle to PDF"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://read.amazon.com/*",
+                "https://read.amazon.co.jp/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}

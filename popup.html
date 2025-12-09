@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindle to PDF</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            width: 320px;
+            padding: 15px;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #1d1d1f;
+        }
+
+        .status {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        #pageCount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0071e3;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 13px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #startBtn {
+            background-color: #0071e3;
+            color: white;
+        }
+
+        #startBtn:hover {
+            background-color: #0077ed;
+        }
+
+        #stopBtn {
+            background-color: #ff3b30;
+            color: white;
+            display: none;
+        }
+
+        #stopBtn:hover {
+            background-color: #ff453a;
+        }
+
+        #downloadBtn {
+            background-color: #34c759;
+            color: white;
+            display: none;
+        }
+
+        #downloadBtn:hover {
+            background-color: #30d158;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Kindle to PDF</h1>
+
+    <div class="status">
+        <div>キャプチャ済みページ数</div>
+        <div id="pageCount">0</div>
+        <div style="font-size: 10px; color: #888; margin-top: 5px;">v1.3 (Fixed)</div>
+    </div>
+
+    <div id="debugLog"
+        style="font-size: 10px; color: red; height: 60px; overflow-y: scroll; border: 1px solid #ddd; display: block; margin-bottom: 10px; padding: 5px; background: #fff;">
+        Ready.
+    </div>
+
+    <div>
+        <label for="direction">ページめくり方向:</label>
+        <select id="direction">
+            <option value="right">右開き (縦書き・マンガ) [←]</option>
+            <option value="left">左開き (横書き) [→]</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="bookType">本の種類 (ウィンドウサイズ調整):</label>
+        <select id="bookType">
+            <option value="current">変更なし (現在のサイズ)</option>
+            <option value="magazine">雑誌・大型本 (A4縦)</option>
+            <option value="manga">マンガ・単行本 (B6縦)</option>
+            <option value="spread">見開き・横長</option>
+            <option value="maximized">最大化</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="outputFormat">保存形式:</label>
+        <select id="outputFormat">
+            <option value="pdf">PDFファイル (.pdf)</option>
+            <option value="zip">画像ファイル (.zip)</option>
+        </select>
+    </div>
+
+    <div class="controls">
+        <button id="startBtn">キャプチャ開始</button>
+        <button id="stopBtn">停止</button>
+        <button id="downloadBtn">保存 (PDF/ZIP)</button>
+    </div>
+
+    <script src="lib/jspdf.umd.min.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>
