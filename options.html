@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kindle to PDF - 詳細設定</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f7;
+            color: #333;
+            max-width: 600px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .desc {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #saveBtn {
+            background: #007aff;
+            color: white;
+        }
+
+        #saveBtn:hover {
+            background: #0060c9;
+        }
+
+        #resetBtn {
+            background: #e5e5ea;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        #resetBtn:hover {
+            background: #dcdce0;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 13px;
+            color: green;
+            height: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>OCR設定 (Geminiプロンプト)</h2>
+
+        <label for="customPrompt">Geminiへの指示プロンプト:</label>
+        <div class="desc">
+            OCR実行時にGemini APIへ送信される指示文です。認識精度を調整したい場合に編集してください。<br>
+            ※画像データは自動的に付与されるため、ここには記述不要です。
+        </div>
+
+        <textarea id="customPrompt"></textarea>
+
+        <div style="text-align: right;">
+            <button id="resetBtn">デフォルトに戻す</button>
+            <button id="saveBtn">保存する</button>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+    <script src="options.js"></script>
+</body>
+
+</html>

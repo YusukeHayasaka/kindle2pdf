@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini APIキーの取得方法</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            font-size: 20px;
+            border-bottom: 2px solid #4285f4;
+            padding-bottom: 10px;
+            color: #1a73e8;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            font-size: 12px;
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ffeeba;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Gemini APIキーの取得方法</h1>
+
+    <p>この拡張機能の文字起こし機能を利用するには、Google AI Studioの無料APIキーが必要です。</p>
+
+    <h2>手順</h2>
+    <ol>
+        <li>
+            <strong>Google AI Studio にアクセス</strong><br>
+            以下のボタンまたはリンクから公式サイトを開きます。<br>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank">https://aistudio.google.com/app/apikey</a>
+            <div style="margin-top: 10px;">
+                <a href="https://aistudio.google.com/app/apikey" target="_blank">
+                    <button>APIキー発行ページを開く</button>
+                </a>
+            </div>
+        </li>
+        <li>
+            <strong>Googleアカウントでログイン</strong><br>
+            普段お使いのGoogleアカウントでログインしてください。
+        </li>
+        <li>
+            <strong>APIキーを作成</strong><br>
+            「<strong>Create API key</strong>」ボタンをクリックします。<br>
+            その後、「<strong>Create API key in new project</strong>」を選択します。
+        </li>
+        <li>
+            <strong>キーをコピー</strong><br>
+            生成された文字列（例: <code>AIzaSy...</code>）をコピーします。
+        </li>
+        <li>
+            <strong>拡張機能に貼り付け</strong><br>
+            Kindle to PDF拡張機能の設定画面に戻り、「Gemini API Key」欄に貼り付けてください。
+        </li>
+    </ol>
+
+    <div class="note">
+        <strong>ご注意:</strong><br>
+        Gemini APIの無料枠には利用制限（1分間に15リクエスト等）があります。<br>
+        この拡張機能は自動で待機時間を設けて制限内に収まるように設計されていますが、短時間に大量の利用を行うと一時的にエラーになる場合があります。
+    </div>
+
+</body>
+
+</html>
