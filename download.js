@@ -8,7 +8,7 @@ async function init() {
     const progressEl = document.getElementById('progressBar');
     const msgEl = document.getElementById('message');
 
-    msgEl.textContent = "Loading data from storage...";
+    msgEl.textContent = "ストレージからデータを読み込み中...";
 
     try {
         // 1. Get Settings and Count
@@ -17,15 +17,15 @@ async function init() {
         const count = meta.imageCount || 0;
 
         if (!count || count === 0) {
-            statusEl.textContent = "No images found.";
+            statusEl.textContent = "画像が見つかりません";
             return;
         }
 
         const appMode = settings.appMode || 'capture_only';
         const isOCR = (appMode === 'capture_ocr') && settings.apiKey;
 
-        statusEl.textContent = "Generating Image File...";
-        msgEl.textContent = "Preparing downloadable images...";
+        statusEl.textContent = "画像ファイルを生成中...";
+        msgEl.textContent = "ダウンロード用の画像を準備中...";
         progressEl.max = count;
         progressEl.value = 0;
 
@@ -43,7 +43,7 @@ async function init() {
                 }
                 progressEl.value = i + 1;
             }
-            statusEl.textContent = "Saving Image ZIP...";
+            statusEl.textContent = "ZIPファイルを保存中...";
             const content = await zip.generateAsync({ type: "blob" });
             downloadFile(content, 'kindle_images.zip');
 
@@ -66,9 +66,9 @@ async function init() {
                     doc.addImage(res[imgKey], 'JPEG', 0, 0, img.width, img.height);
                 }
                 progressEl.value = i + 1;
-                statusEl.textContent = `PDF Gen ${i + 1}/${count}`;
+                statusEl.textContent = `PDF生成中 ${i + 1}/${count}`;
             }
-            statusEl.textContent = "Saving PDF...";
+            statusEl.textContent = "PDFを保存中...";
             doc.save('kindle_book.pdf');
         }
 
@@ -82,24 +82,24 @@ async function init() {
             const doOCR = confirm("画像の保存が完了しました。\n続けて「文字起こし (OCR)」を開始しますか？\n\n※時間がかかる場合があります。");
 
             if (!doOCR) {
-                statusEl.textContent = "OCR Cancelled";
+                statusEl.textContent = "OCRキャンセル";
                 statusEl.style.color = "gray";
-                msgEl.textContent = "OCR process was skipped by user.";
+                msgEl.textContent = "OCR処理はユーザーによりスキップされました";
                 return; // Stop here
             }
 
             statusEl.style.color = "blue";
-            statusEl.textContent = "Starting OCR...";
-            msgEl.textContent = `Using ${settings.geminiModel}. Please wait (Slow mode for API limits)...`;
+            statusEl.textContent = "OCR開始中...";
+            msgEl.textContent = `${settings.geminiModel} を使用中。しばらくお待ちください...`;
             progressEl.value = 0;
 
             let combinedText = "";
             const isMarkdown = settings.ocrFormat === 'markdown';
 
-            if (isMarkdown) combinedText += `# OCR Transcript\n\n`;
+            if (isMarkdown) combinedText += `# OCR 文字起こし\n\n`;
 
             for (let i = 0; i < count; i++) {
-                statusEl.textContent = `OCR Processing: Page ${i + 1} / ${count}`;
+                statusEl.textContent = `OCR処理中: ${i + 1} / ${count} ページ`;
                 progressEl.value = i + 1;
 
                 const imgKey = `img_${i}`;
@@ -113,12 +113,12 @@ async function init() {
                         model: settings.geminiModel
                     });
 
-                    const text = response.text || "[No Text Found]";
+                    const text = response.text || "[テキストが見つかりません]";
 
                     if (isMarkdown) {
-                        combinedText += `## Page ${i + 1}\n\n${text}\n\n`;
+                        combinedText += `## ${i + 1} ページ\n\n${text}\n\n`;
                     } else {
-                        combinedText += `[Page ${i + 1}]\n${text}\n\n`;
+                        combinedText += `[${i + 1} ページ]\n${text}\n\n`;
                     }
 
                     // Rate Limiting
@@ -128,7 +128,7 @@ async function init() {
                 }
             }
 
-            statusEl.textContent = "Saving OCR Result...";
+            statusEl.textContent = "OCR結果を保存中...";
 
             // Get title from storage
             const meta2 = await chrome.storage.local.get(['bookTitle']);
@@ -142,13 +142,13 @@ async function init() {
             downloadFile(blob, `${filename}.${ext}`);
         }
 
-        statusEl.textContent = "All Done!";
+        statusEl.textContent = "完了！";
         statusEl.style.color = "green";
-        msgEl.textContent = "Process complete.";
+        msgEl.textContent = "処理が完了しました";
 
     } catch (error) {
         console.error(error);
-        statusEl.textContent = "Error!";
+        statusEl.textContent = "エラー！";
         msgEl.textContent = error.message;
     }
 }
